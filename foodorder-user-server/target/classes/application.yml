@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+  redis:
+    host: 42.194.207.215
+    port: 16379
+    password: ldl5463
+
+
+mybatis:
+  type-aliases-package: com.foodorder.inter.user.bean
+  mapper-locations: classpath:mapper/*.xml,classpath:mapper/extend/*.xml

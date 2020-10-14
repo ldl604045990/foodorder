@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/foodorder.iml" filepath="$PROJECT_DIR$/.idea/foodorder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodorder-com/foodorder-com.iml" filepath="$PROJECT_DIR$/foodorder-com/foodorder-com.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodorder-inter/foodorder-inter.iml" filepath="$PROJECT_DIR$/foodorder-inter/foodorder-inter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodorder-user/foodorder-user.iml" filepath="$PROJECT_DIR$/foodorder-user/foodorder-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foodorder-user-server/foodorder-user-server.iml" filepath="$PROJECT_DIR$/foodorder-user-server/foodorder-user-server.iml" />
+    </modules>
+  </component>
+</project>

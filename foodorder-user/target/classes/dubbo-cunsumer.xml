@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="foodorder-user" owner="foodorder" organization="foodorder.com"  />
+
+	<!-- 客户端缺省值 30s超时 -->
+	<dubbo:consumer timeout="61000" retries="0" loadbalance="leastactive" check="false" />
+
+	<!--向 zookeeper 订阅 provider 的地址，由 zookeeper 定时推送 file为本地缓存配置中心的配置 -->
+	<dubbo:registry address="${zk.address}" />
+
+
+	<!-- ####################### 用户服务 base ######################  -->
+
+	<dubbo:reference id="iDuOrderUser" interface="com.foodorder.inter.user.web.IDuOrderUser"/>
+
+	<dubbo:reference id="iDuOrderShop" interface="com.foodorder.inter.user.web.IDuOrderShop"/>
+
+
+</beans>

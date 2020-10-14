@@ -1,0 +1,9 @@
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /apis
+
+zk:
+  address: zookeeper://42.194.207.215:2181

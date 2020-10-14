@@ -1,0 +1,14 @@
+com\foodorder\util\ResultBean.class
+com\foodorder\constant\TimingConstant.class
+com\foodorder\util\StartUpMyBtis.class
+com\foodorder\constant\SysRetCodeDefine.class
+com\foodorder\constant\RedisConstantKey.class
+com\foodorder\util\DubboResult.class
+com\foodorder\exception\IllegalParamException.class
+com\foodorder\util\MyCommentGenerator.class
+com\foodorder\exception\BusinessServiceException.class
+com\foodorder\redisconf\RedisProperties.class
+com\foodorder\constant\DeleteFlag.class
+com\foodorder\constant\OrderUserType.class
+com\foodorder\util\PagedResult.class
+com\foodorder\redisconf\RedisUtil.class

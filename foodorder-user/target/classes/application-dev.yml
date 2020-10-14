@@ -1,0 +1,13 @@
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /apis
+    #dubbo:
+      #application:
+      #  name: order-user-web
+     # register:
+     #   address: zookeeper://127.0.0.1:2181
+zk:
+  address: zookeeper://127.0.0.1:2181

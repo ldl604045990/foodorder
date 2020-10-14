@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="foodorder-user-server" />
+        <module name="foodorder-inter" />
+        <module name="foodorder-user" />
+        <module name="foodorder-com" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="foodorder" target="1.8" />
+      <module name="foodorder (1)" target="1.8" />
+      <module name="foodorder (2)" target="1.8" />
+      <module name="foodorder-com" target="1.8" />
+      <module name="foodorder-inter" target="1.8" />
+      <module name="foodorder-shop-server" target="1.8" />
+      <module name="foodorder-user" target="1.8" />
+      <module name="foodorder-user-server" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="foodorder" options="-parameters" />
+      <module name="foodorder (1)" options="-parameters" />
+      <module name="foodorder (2)" options="-parameters" />
+      <module name="foodorder-com" options="-parameters" />
+      <module name="foodorder-inter" options="-parameters" />
+      <module name="foodorder-shop-server" options="-parameters" />
+      <module name="foodorder-user" options="-parameters" />
+      <module name="foodorder-user-server" options="-parameters" />
+    </option>
+  </component>
+</project>

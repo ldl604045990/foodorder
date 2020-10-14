@@ -1,0 +1,16 @@
+server:
+  port: 8089
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://42.194.207.215:3306/order?useUnicode=true&characterEncoding=utf8
+      username: root
+      password: ldl5463
+      db-type: com.alibaba.druid.pool.DruidDataSource
+
+zk:
+  address: zookeeper://127.0.0.1:2181

@@ -1,0 +1,12 @@
+com\foodorder\service\inter\OrderShopService.class
+com\foodorder\UserServerApplication.class
+com\foodorder\dao\OrderShopMapper.class
+com\foodorder\dubbo\DuOrderUser.class
+com\foodorder\service\OrderShopServiceImpl.class
+com\foodorder\service\OrderUserServiceImpl.class
+com\foodorder\dao\OrderUserMapper.class
+com\foodorder\service\inter\OrderUserService.class
+com\foodorder\util\BeanResultUtil.class
+com\foodorder\dubbo\DuOrderShop.class
+com\foodorder\config\DruidConfiguration.class
+com\foodorder\dao\base\IBaseMapper.class

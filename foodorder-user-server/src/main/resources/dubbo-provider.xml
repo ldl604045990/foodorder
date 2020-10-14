@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!--定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识 -->
+	<dubbo:application name="foodorder-user-server" owner="foodorder" organization="foodorder.com"  />
+
+	<!-- 提供方的缺省值 重试2次，500毫秒超时，线程50个 -->
+	<!-- cluster集群模式:failover,failfast,failsafe,failback,forking,broadcast -->
+	<!-- loadbalance负载模式 random随机,roundbobin轮询,leastactive慢节点调用最少,consistenthash一致性hash -->
+	<dubbo:provider timeout="60000" retries="0" loadbalance="leastactive" />
+
+	<!--使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper file="生产在指定" zookeeper://localhost:2181 -->
+	<dubbo:registry id="default" address="${zk.address}" />
+
+	<!-- 用dubbo协议在20880端口暴露服务 serialization="fastjson" 默认序列化hession -->
+	<dubbo:protocol name="dubbo" port="20880" threadpool="fixed" threads="300" accepts="300" />
+
+	<!-- 借款管理 <bean id="duLoanManagement" class="com.fuli.dubbo.operator.credit.DuLoanManagementImpl"></bean> <dubbo:service interface="com.fuli.dubbo.facade.operator.credit.IDuLoanManagement"
+		ref="duLoanManagement" /> -->
+
+	<bean id="duOrderUser" class="com.foodorder.dubbo.DuOrderUser" />
+	<dubbo:service interface="com.foodorder.inter.user.web.IDuOrderUser" ref="duOrderUser" />
+
+	<bean id="duOrderShop" class="com.foodorder.dubbo.DuOrderShop" />
+	<dubbo:service interface="com.foodorder.inter.user.web.IDuOrderShop" ref="duOrderShop" />
+</beans>

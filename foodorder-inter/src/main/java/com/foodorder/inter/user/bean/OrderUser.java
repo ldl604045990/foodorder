@@ -1,8 +1,11 @@
 package com.foodorder.inter.user.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class OrderUser {
+public class OrderUser implements Serializable {
+
+    private static final long serialVersionUID = 81692733435396481L;
     /**
      * 主键ID
      */

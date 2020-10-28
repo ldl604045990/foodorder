@@ -16,4 +16,6 @@ public interface OrderUserService {
     Boolean disableOrderUser(Integer userId);
 
     Boolean deleteOrderUser(Integer userId);
+
+    Boolean sendSmsTen(String phone);
 }

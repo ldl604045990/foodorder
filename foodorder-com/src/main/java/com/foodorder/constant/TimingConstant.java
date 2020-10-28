@@ -3,7 +3,9 @@ package com.foodorder.constant;
 public enum TimingConstant {
 
     /** 登录存在时间 */
-    LOGIN_EX_TIMING(3600, "登录存在时间");
+    LOGIN_EX_TIMING(3600, "登录存在时间"),
+
+    REGISTER_CODE_TIME(120,"注册码存在时间");
 
 
     private Integer key;

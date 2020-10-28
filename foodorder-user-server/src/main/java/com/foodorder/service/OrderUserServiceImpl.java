@@ -4,18 +4,22 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.foodorder.constant.DeleteFlag;
 import com.foodorder.constant.OrderUserType;
 import com.foodorder.constant.ConstantKey;
 import com.foodorder.constant.TimingConstant;
 import com.foodorder.dao.OrderUserMapper;
+import com.foodorder.exception.BusinessServiceException;
 import com.foodorder.exception.IllegalParamException;
 import com.foodorder.inter.user.bean.OrderUser;
 import com.foodorder.redisconf.RedisUtil;
 import com.foodorder.service.inter.OrderUserService;
 import com.foodorder.util.BeanResultUtil;
+import com.foodorder.util.FoodComUtil;
 import com.foodorder.util.PagedResult;
+import com.foodorder.util.SendSms;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class OrderUserServiceImpl implements OrderUserService {
@@ -68,18 +73,27 @@ public class OrderUserServiceImpl implements OrderUserService {
         return orderUser;
     }
 
-    public static void main(String[] args) {
-        byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
-        SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, ConstantKey.LOGIN_PASSWORD_KEY.getBytes());
-        System.out.println(aes.decryptStr("4b8e1014ae7e89b1006999be51d552a4"));
-    }
-
     @Override
     public Boolean register(JSONObject json) {
         OrderUser user = JSON.toJavaObject(json, OrderUser.class);
         OrderUser orderUser = orderUserMapper.selectOrderUserByUserName(user.getUserName());
         if(orderUser!=null){
             throw IllegalParamException.throwMsgException("用户已存在！");
+        }
+        String phone = user.getPhone();
+        if(!FoodComUtil.isMobileNO(phone)){
+            throw IllegalParamException.throwMsgException("请输入正确的手机号码！");
+        }
+        Integer code = json.getInteger("code");
+        if(code==null||code.equals("")){
+            throw IllegalParamException.throwMsgException("请输入验证码！");
+        }
+        Integer redisCode = redisUtil.getObject(ConstantKey.REGISTER_TEN_PHONE+phone);
+        if(redisCode==null||redisCode.equals("")){
+            throw IllegalParamException.throwMsgException("验证码已失效！");
+        }
+        if(!redisCode.equals(code)){
+            throw IllegalParamException.throwMsgException("验证码错误！");
         }
 
         //构建
@@ -138,6 +152,35 @@ public class OrderUserServiceImpl implements OrderUserService {
         String loginStatsValue = redisUtil.getObject(userKey);
         if(StringUtils.isNotEmpty(loginStatsValue)){
             redisUtil.deleteKey(loginStatsValue);
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean sendSmsTen(String phone) {
+        if(!FoodComUtil.isMobileNO(phone)){
+            throw IllegalParamException.throwMsgException("请输入正确的手机号码！");
+        }
+
+        Integer random = new Random().nextInt(9999-1000+1)+1000;
+        String smsResult = SendSms.sendSmsTen(phone,String.valueOf(random),"2");
+        if(smsResult==null||smsResult.equals("")){
+            throw BusinessServiceException.throwMsgException("发送短信验证码失败！");
+        }
+        JSONObject jsonObject = JSONObject.parseObject(smsResult);
+        JSONArray sendStatusSet = jsonObject.getJSONArray("SendStatusSet");
+        if(sendStatusSet==null||sendStatusSet.equals("")){
+            throw BusinessServiceException.throwMsgException("发送短信验证码失败！");
+        }
+        String status = "NO";
+        for (int i = 0; i < sendStatusSet.size(); i++) {
+            JSONObject resultObj = sendStatusSet.getJSONObject(i);
+            status = resultObj.getString("Code");
+            break;
+        }
+        if(status.equals("Ok")){
+            //短信发送成功
+            redisUtil.saveObject(ConstantKey.REGISTER_TEN_PHONE+phone,random,TimingConstant.REGISTER_CODE_TIME.getKey());
         }
         return true;
     }

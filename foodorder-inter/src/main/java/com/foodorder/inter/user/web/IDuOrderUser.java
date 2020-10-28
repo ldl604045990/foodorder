@@ -40,4 +40,6 @@ public interface IDuOrderUser {
 
     DubboResult<?> deleteOrderUser(Integer userId);
 
+    DubboResult<Boolean> sendSmsTen(String phone);
+
 }

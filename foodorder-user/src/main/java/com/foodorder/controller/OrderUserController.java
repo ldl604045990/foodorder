@@ -23,6 +23,21 @@ public class OrderUserController extends BaseController {
     private IDuOrderUser iDuOrderUser;
 
 
+    /**
+     * 发送验证码
+     * @param phone
+     * @return
+     */
+    @RequestMapping("/sendSmsTen")
+    public ResultBean<Boolean> sendSmsTen(@RequestParam(required = true) String phone){
+        DubboResult<Boolean> dubboResult = iDuOrderUser.sendSmsTen(phone);
+        if(dubboResult.getBusiCode()==DubboResult.BUSI_CODE_200){
+            return ResultBean.success("发送成功",dubboResult.getData());
+        }
+        return ResultBean.error(dubboResult.getMessage());
+    }
+
+
     @RequestMapping("/login")
     public ResultBean<OrderUser> login(@RequestParam(name = "userName")String userName, @RequestParam(name = "pwd")String pwd){
         DubboResult<OrderUser> dubboResult = iDuOrderUser.login(userName,pwd);
@@ -32,6 +47,11 @@ public class OrderUserController extends BaseController {
         return ResultBean.error(dubboResult.getMessage());
     }
 
+    /**
+     * 注册用户
+     * @param params
+     * @return
+     */
     @RequestMapping("/registerUser")
     public ResultBean<Boolean> register(@RequestParam(required = true,name = "params") String params){
         JSONObject json = getJSONParams(params);
@@ -42,6 +62,11 @@ public class OrderUserController extends BaseController {
         return ResultBean.error(dubboResult.getMessage());
     }
 
+    /**
+     * 禁用用户
+     * @param userId
+     * @return
+     */
     @RequestMapping("/disableOrderUser/{userId}")
     public ResultBean<?> disableOrderUser(@PathVariable Integer userId){
         DubboResult<?> dubboResult = iDuOrderUser.disableOrderUser(userId);
@@ -51,6 +76,11 @@ public class OrderUserController extends BaseController {
         return ResultBean.error(dubboResult.getMessage());
     }
 
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
     @RequestMapping("/deleteOrderUser/{userId}")
     public ResultBean<?> deleteOrderUser(@PathVariable Integer userId){
         DubboResult<?> dubboResult = iDuOrderUser.deleteOrderUser(userId);

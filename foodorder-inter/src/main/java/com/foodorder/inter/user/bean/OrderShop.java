@@ -1,19 +1,20 @@
 package com.foodorder.inter.user.bean;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
 public class OrderShop implements Serializable {
 
-
-    private static final long serialVersionUID = -6328987147233086969L;
+    private static final long serialVersionUID = 4911174143538223952L;
     /**
      *
      */
     private Integer id;
+
+    /**
+     * 用户ID
+     */
+    private Integer userId;
 
     /**
      * 联系电话
@@ -36,7 +37,7 @@ public class OrderShop implements Serializable {
     private Date createDate;
 
     /**
-     * 是否删除（0：正常 1：珊瑚）
+     * 是否删除（0：正常 1：删除）
      */
     private Integer deleteFlag;
 
@@ -79,6 +80,22 @@ public class OrderShop implements Serializable {
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * 用户ID
+     * @return user_id 用户ID
+     */
+    public Integer getUserId() {
+        return userId;
+    }
+
+    /**
+     * 用户ID
+     * @param userId 用户ID
+     */
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     /**
@@ -146,16 +163,16 @@ public class OrderShop implements Serializable {
     }
 
     /**
-     * 是否删除（0：正常 1：珊瑚）
-     * @return delete_flag 是否删除（0：正常 1：珊瑚）
+     * 是否删除（0：正常 1：删除）
+     * @return delete_flag 是否删除（0：正常 1：删除）
      */
     public Integer getDeleteFlag() {
         return deleteFlag;
     }
 
     /**
-     * 是否删除（0：正常 1：珊瑚）
-     * @param deleteFlag 是否删除（0：正常 1：珊瑚）
+     * 是否删除（0：正常 1：删除）
+     * @param deleteFlag 是否删除（0：正常 1：删除）
      */
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;

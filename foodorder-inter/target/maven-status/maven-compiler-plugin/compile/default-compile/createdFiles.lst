@@ -1,6 +1,8 @@
-com\foodorder\inter\user\bean\OrderShop.class
-com\foodorder\inter\user\bean\OrderUser.class
 com\foodorder\inter\user\web\IDuOrderShop.class
-com\foodorder\inter\user\dto\UserSessionDto.class
+com\foodorder\inter\user\web\IDuOrderMenu.class
 com\foodorder\inter\user\web\IDuOrderUser.class
 com\foodorder\inter\user\dto\OrderShopDto.class
+com\foodorder\inter\user\bean\OrderShop.class
+com\foodorder\inter\user\bean\OrderUser.class
+com\foodorder\inter\user\bean\OrderMenu.class
+com\foodorder\inter\user\dto\UserSessionDto.class

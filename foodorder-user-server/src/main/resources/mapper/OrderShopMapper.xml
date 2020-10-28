@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.foodorder.userserver.dao.OrderShopMapper" >
+<mapper namespace="com.foodorder.dao.OrderShopMapper" >
   <resultMap id="BaseResultMap" type="com.foodorder.inter.user.bean.OrderShop" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
     <result column="shop_log" property="shopLog" jdbcType="VARCHAR" />
@@ -15,7 +16,7 @@
     <result column="deadline" property="deadline" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, phone, shop_name, shop_log, create_date, delete_flag, update_date, update_by,
+    id, user_id, phone, shop_name, shop_log, create_date, delete_flag, update_date, update_by,
     create_by, address, deadline
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -29,20 +30,25 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.foodorder.inter.user.bean.OrderShop" >
-    insert into order_shop (id, phone, shop_name,
-      shop_log, create_date, delete_flag,
-      update_date, update_by, create_by,
-      address, deadline)
-    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR},
-      #{shopLog,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER},
-      #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER},
-      #{address,jdbcType=VARCHAR}, #{deadline,jdbcType=TIMESTAMP})
+    insert into order_shop (id, user_id, phone,
+      shop_name, shop_log, create_date,
+      delete_flag, update_date, update_by,
+      create_by, address, deadline
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR},
+      #{shopName,jdbcType=VARCHAR}, #{shopLog,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{deleteFlag,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER},
+      #{createBy,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{deadline,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.foodorder.inter.user.bean.OrderShop" >
     insert into order_shop
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="phone != null" >
         phone,
@@ -79,6 +85,9 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
       </if>
@@ -114,6 +123,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.foodorder.inter.user.bean.OrderShop" >
     update order_shop
     <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
@@ -149,7 +161,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.foodorder.inter.user.bean.OrderShop" >
     update order_shop
-    set phone = #{phone,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
       shop_name = #{shopName,jdbcType=VARCHAR},
       shop_log = #{shopLog,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},

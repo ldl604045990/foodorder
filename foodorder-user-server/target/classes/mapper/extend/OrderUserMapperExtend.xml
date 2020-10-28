@@ -9,7 +9,6 @@
             order_user
         where
             user_name = #{userName}
-            and deleteFlag = 0
   </select>
 
     <select id="getPageOrderUserByPrams" parameterType="java.lang.String" resultMap="BaseResultMap">

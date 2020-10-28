@@ -31,6 +31,7 @@ public class UserWebFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         passUrls.add("/apis/orderUser/login");
         passUrls.add("/apis/orderUser/registerUser");
+        passUrls.add("/apis/orderUser/sendSmsTen");
     }
 
     @Override

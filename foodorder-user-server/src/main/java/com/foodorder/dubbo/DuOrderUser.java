@@ -73,4 +73,15 @@ public class DuOrderUser implements IDuOrderUser {
             return DubboResult.error(e.getMessage());
         }
     }
+
+    @Override
+    public DubboResult<Boolean> sendSmsTen(String phone) {
+        try {
+            Boolean result = orderUserService.sendSmsTen(phone);
+            return DubboResult.success(result);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return DubboResult.error(e.getMessage());
+        }
+    }
 }

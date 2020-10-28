@@ -10,6 +10,6 @@ public interface OrderShopService {
 
     PagedResult<OrderShopDto> getPagedOrderShop(JSONObject params, Integer pageNo, Integer pageSize);
 
-    DubboResult<Boolean> registerOrderShop(JSONObject json);
+    Boolean registerOrderShop(JSONObject json);
 
 }

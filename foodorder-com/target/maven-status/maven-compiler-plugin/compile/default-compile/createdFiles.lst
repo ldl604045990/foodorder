@@ -1,8 +1,10 @@
 com\foodorder\util\ResultBean.class
+com\foodorder\constant\ConstantKey.class
 com\foodorder\constant\TimingConstant.class
+com\foodorder\util\FoodComUtil.class
 com\foodorder\util\StartUpMyBtis.class
 com\foodorder\constant\SysRetCodeDefine.class
-com\foodorder\constant\RedisConstantKey.class
+com\foodorder\util\SendSms.class
 com\foodorder\util\DubboResult.class
 com\foodorder\exception\IllegalParamException.class
 com\foodorder\util\MyCommentGenerator.class

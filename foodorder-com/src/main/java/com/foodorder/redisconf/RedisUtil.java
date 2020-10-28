@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -18,6 +20,7 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    private RedisSerializer redisSerializer = new StringRedisSerializer();
 
     /**
      * 根据缓存键获取Redis缓存中的值
@@ -48,6 +51,7 @@ public class RedisUtil {
      */
     public Boolean saveObject(String key, Object value, int seconds) {
         try {
+            redisTemplate.setKeySerializer(redisSerializer);
             if (seconds > 0) {
                 redisTemplate.opsForValue().set(key, value, seconds, TimeUnit.SECONDS);
             } else {
